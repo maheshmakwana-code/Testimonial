@@ -1,0 +1,53 @@
+<h1>Testimonial Page</h1>
+
+<div class="testimonail-add-page">
+    
+    <form action="<?php echo $block->getFormAction() ?>" method="post">
+        <h2> Author Information</h2>
+        <div class="input-wrapper">
+            <input name="author_name" type="text" placeholder="Author Name">
+            <input name="author_email" type="email" placeholder="Author Email">
+        </div>
+        <div class="input-wrapper">
+            <input name="author_company" type="test" placeholder="Author Company">
+            <input name="author_job_title" type="test" placeholder="Author Job Title">
+        </div>
+        <div class="input-wrapper">
+            <input name="author_city" type="test" placeholder="Your City">
+        </div>
+
+        <h2>Social Links</h2>
+        <div class="input-wrapper">
+            <input name="facebook_url" type="text" placeholder="Facebook Profile">
+            <input name="linkedin_url" type="text" placeholder="LinkedIn Profile">
+        </div>
+        <div class="input-wrapper">
+            <input name="twitter_url" type="text" placeholder="Twitter">
+            <input name="youtu_url" type="text" placeholder="Youtube Url">
+        </div>
+
+        <h2>Testimonial Content</h2>
+        <div class="input-wrapper">
+            <input name="testimonial_title" type="text" placeholder="Title">
+        </div>
+        <div class="input-wrapper">
+            <textarea id="testimonial_description" name="testimonial_description" rows="4" cols="50" placeholder="Description"></textarea>
+        </div>
+        <div class="input-wrapper">
+            <div class="rating">
+            <input id="star5" name="testimonial_rating_number" type="radio" value="5" class="radio-btn hide" />
+            <label for="star5" >☆</label>
+            <input id="star4" name="testimonial_rating_number" type="radio" value="4" class="radio-btn hide" />
+            <label for="star4" >☆</label>
+            <input id="star3" name="testimonial_rating_number" type="radio" value="3" class="radio-btn hide" />
+            <label for="star3" >☆</label>
+            <input id="star2" name="testimonial_rating_number" type="radio" value="2" class="radio-btn hide" />
+            <label for="star2" >☆</label>
+            <input id="star1" name="testimonial_rating_number" type="radio" value="1" class="radio-btn hide" />
+            <label for="star1" >☆</label>
+            <div class="clear"></div>
+        </div>
+            <input type="submit" class="save-testimonial" value="Submit Your Testimonial">
+        </div>
+    </form>
+</div>

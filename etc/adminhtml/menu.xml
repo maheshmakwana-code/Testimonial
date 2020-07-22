@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+    	<add id="Apriljune_Testimonial::testimonial" title="Apriljune Testimonial" resource="Apriljune_Testimonial::testimonial" module="Apriljune_Testimonial"  sortOrder="20"/>
+    	
+        <add id="Apriljune_Testimonial::testimoniallist" title="Testimonial List" resource="Apriljune_Testimonial::apriljune_testimonial_testimonial" parent="Apriljune_Testimonial::testimonial" action="apriljune_testimonial/testimonial/testimonial" module="Apriljune_Testimonial" sortOrder="20"/>
+    </menu>
+</config>

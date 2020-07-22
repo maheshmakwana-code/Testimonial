@@ -1,0 +1,72 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="apriljune_testimonial" resource="default" comment="Table for Apriljune Testimonial Main">
+        <column xsi:type="int" name="id" identity="true" comment="Column Auto Increment" unsigned="true"
+                nullable="false"/>
+        <column xsi:type="int" name="status" nullable="false"/>
+        <column xsi:type="date" name="created_at"  nullable="false"/>
+        <column xsi:type="date" name="modified_at"  nullable="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <table name="apriljune_testimonial_author" resource="default" comment="Table for Apriljune Testimonial Author">
+        <column xsi:type="int" name="id" identity="true" comment="Column Auto Increment" unsigned="true"
+                nullable="false"/>
+        <column xsi:type="int" name="testimonial_id" comment="Foreign Key Constraint"/>
+        <column xsi:type="varchar" name="author_name" nullable="false"/>
+        <column xsi:type="varchar" name="author_email" nullable="false"/>
+        <column xsi:type="varchar" name="author_company" nullable="false"/>
+        <column xsi:type="varchar" name="author_job_title" nullable="false"/>
+        <column xsi:type="varchar" name="author_city"  nullable="false"/>
+        <column xsi:type="varchar" name="author_image" nullable="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="APRILJUNE_TESTIMONIAL_ID_APRILJUNE_TESTIMONIAL_AUTHOR_TESTIMONIAL_ID"
+                    table="apriljune_testimonial_author" column="id"
+                    referenceTable="apriljune_testimonial" referenceColumn="id"/>
+    </table>
+
+    <table name="apriljune_testimonial_social" resource="default"
+           comment="Table for Apriljune Testimonial Social Profile Information">
+        <column xsi:type="int" name="id" identity="true" comment="Column Auto Increment" unsigned="true"
+                nullable="false"/>
+        <column xsi:type="int" name="testimonial_id" comment="Foreign Key Constraint"/>
+        <column xsi:type="varchar" name="facebook_url" nullable="false"/>
+        <column xsi:type="varchar" name="linkedin_url" nullable="false"/>
+        <column xsi:type="varchar" name="twitter_url" nullable="false"/>
+        <column xsi:type="varchar" name="youtu_url" nullable="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="APRILJUNE_TESTIMONIAL_ID_APRILJUNE_TESTIMONIAL_SOCIAL_TESTIMONIAL_ID"
+                    table="apriljune_testimonial_social" column="id"
+                    referenceTable="apriljune_testimonial" referenceColumn="id"/>
+    </table>
+
+    <table name="apriljune_testimonial_content" resource="default" comment="Table for Apriljune Testimonial Content">
+        <column xsi:type="int" name="id" identity="true" comment="Column Auto Increment" unsigned="true"
+                nullable="false"/>
+        <column xsi:type="int" name="testimonial_id" comment="Foreign Key Id from Author Table"/>
+        <column xsi:type="varchar" name="testimonial_title" nullable="false"/>
+        <column xsi:type="varchar" name="testimonial_description" nullable="false"/>
+        <column xsi:type="varchar" name="testimonial_rating_number" nullable="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="APRILJUNE_TESTIMONIAL_ID_APRILJUNE_TESTIMONIAL_CONTENT_TESTIMONIAL_ID"
+                    table="apriljune_testimonial_content" column="id"
+                    referenceTable="apriljune_testimonial" referenceColumn="id"/>
+    </table>
+
+</schema>
+
+
+
+
