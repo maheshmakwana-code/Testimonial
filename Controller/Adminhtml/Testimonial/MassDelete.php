@@ -1,46 +1,77 @@
 <?php
+
 namespace Apriljune\Testimonial\Controller\Adminhtml\Testimonial;
 
-class MassDelete extends \Magento\Backend\App\Action {
+use Exception;
+use Magento\Backend\App\Action;
+use Magento\Framework\Controller\ResultFactory;
+use Magento\Backend\App\Action\Context;
+use Apriljune\Testimonial\Model\ResourceModel\Testimonial\Collection as Testimonial;
 
-    protected $_filter;
+/**
+ * Class MassDelete
+ *
+ * @package Apriljune\Testimonial\Controller\Adminhtml\Testimonial
+ */
+class MassDelete extends Action
+{
 
-    protected $_collectionFactory;
-
-    public function __construct(
-        \Magento\Ui\Component\MassAction\Filter $filter,
-        \Apriljune\Testimonial\Model\ResourceModel\Testimonial\Collection $collectionFactory,
-        \Magento\Backend\App\Action\Context $context
-        ) {
-        $this->_filter            = $filter;
-        $this->_collectionFactory = $collectionFactory;
-        parent::__construct($context);
-    }
-
-    public function execute() {
-        try{ 
-
-            $logCollection = $this->_filter->getCollection($this->_collectionFactory->create());
-            echo "<pre>";
-            print_r($logCollection->getData());
-            exit;
-            foreach ($logCollection as $item) {
-                $item->delete();
-            }
-            $this->messageManager->addSuccess(__('Log Deleted Successfully.'));
-        }catch(Exception $e){
-            $this->messageManager->addError($e->getMessage());
-        }
-        $resultRedirect = $this->resultRedirectFactory->create();
-        return $resultRedirect->setPath('*/*/');
-    }
-
-     /**
-     * is action allowed
-     *
-     * @return bool
+    /**
+     * @var Testimonial
      */
-    protected function _isAllowed() {
-        return $this->_authorization->isAllowed('Apriljune_Testimonial::view');
+    protected $testimonial;
+
+    /**
+     * Message manager interface
+     *
+     * @var \Magento\Framework\Message\ManagerInterface
+     */
+    protected $messageManager;
+
+    /**
+     * @var \Magento\Framework\Controller\ResultFactory
+     */
+    protected $resultFactory;
+
+
+    /**
+     * MassDelete constructor.
+     * @param Context $context
+     * @param Testimonial $testimonial
+     */
+    public function __construct( Context $context, Testimonial $testimonial )
+    {
+        parent::__construct($context);
+        $this->testimonial = $testimonial;
+        $this->messageManager = $context->getMessageManager();
+        $this->resultFactory = $context->getResultFactory();
+    }
+
+    /**
+     * Execute action
+     *
+     * @return \Magento\Backend\Model\View\Result\Redirect
+     */
+    public function execute()
+    {
+        $selectedIds = $this->getRequest()->getParams()['selected'];
+        if (!is_array($selectedIds)) {
+            $this->messageManager->addErrorMessage(__('Please select one or more testimonial.'));
+        } else {
+            try {
+                $collectionSize = count($selectedIds);
+                foreach ($selectedIds as $_id) {
+                    $testimonial = $this->testimonial->getItems()[$_id];
+                    $testimonial->delete();
+                }
+                $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $collectionSize));
+            } catch (Exception $e) {
+                $this->messageManager->addErrorMessage($e->getMessage());
+            }
+        }
+
+        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+        return $resultRedirect->setPath('*/*/');
     }
 }
