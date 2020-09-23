@@ -1,6 +1,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
 <!-- Create our type GridDataProvider -->
-      <virtualType name="TestimonialGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+     <!--  <virtualType name="TestimonialGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
             <arguments>
                 <argument name="collection" xsi:type="object" shared="false">Apriljune\Testimonial\Model\ResourceModel\Testimonial\Collection</argument>
                 <argument name="filterPool" xsi:type="object" shared="false">TestimonialGridFilterPool</argument>
@@ -28,7 +28,23 @@
             <argument name="mainTable" xsi:type="string">apriljune_testimonial</argument>
             <argument name="resourceModel" xsi:type="string">Apriljune\Testimonial\Model\ResourceModel\Testimonial</argument>
         </arguments>
-    </virtualType>
+    </virtualType> -->
+    <type name="Apriljune\Testimonial\Model\ResourceModel\Testimonial\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">apriljune_testimonial</argument>
+            <argument name="eventPrefix" xsi:type="string">test_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">test_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Apriljune\Testimonial\Model\ResourceModel\Testimonial</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="apriljune_testimonial_testimonial_listing_data_source" xsi:type="string">Apriljune\Testimonial\Model\ResourceModel\Testimonial\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
 </config>
 
 
