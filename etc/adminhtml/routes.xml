@@ -5,5 +5,8 @@
     <route id="apriljune_testimonial" frontName="apriljune_testimonial">
       <module name="Apriljune_Testimonial" before="Magento_Backend" />
     </route>
+     <route id="testimonial" frontName="testimonial">
+            <module name="Apriljune_Testimonial" after="Magento_Backend" />
+        </route>
   </router>
 </config>

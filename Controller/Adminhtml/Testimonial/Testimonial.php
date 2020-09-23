@@ -23,9 +23,5 @@ class Testimonial extends \Magento\Backend\App\Action
 		return $resultPage;
 	}
 
-	protected function _isAllowed()
-    {
-        return true;
-    }
 
 }

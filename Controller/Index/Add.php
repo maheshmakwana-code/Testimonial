@@ -65,6 +65,19 @@ class Add extends Action
     private $authorResource;
 
     /**
+     * @var \Magento\Framework\Controller\ResultFactory
+     */
+    protected $resultFactory;
+
+    /**
+     * Message manager interface
+     *
+     * @var \Magento\Framework\Message\ManagerInterface
+     */
+    protected $messageManager;
+
+
+    /**
      * Add constructor.
      * @param Context $context
      * @param Testimonial $testimonial
@@ -100,6 +113,8 @@ class Add extends Action
         $this->socialResource      = $socialResource;
         $this->contentResource     = $contentResource;
         $this->authorResource      = $authorResource;
+        $this->resultFactory = $context->getResultFactory();
+        $this->messageManager = $context->getMessageManager();
     }
 
     /**
@@ -172,7 +187,7 @@ class Add extends Action
             $this->messageManager->addSuccessMessage("Testimonial saved successfully!");
                       
             /* Redirect back to Testimonial page */
-            $redirect = $this->resultRedirectFactory->create(ResultFactory::TYPE_REDIRECT);
+            $redirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
             $redirect->setPath('/testimonial/index/add');
             return $redirect;
         }
